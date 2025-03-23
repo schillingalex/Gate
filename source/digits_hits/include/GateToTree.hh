@@ -184,6 +184,9 @@ private:
   G4int m_gammaType = 0;
 
 
+  std::string m_creatorProcess;
+  std::string m_productionVolume;
+
 
   static const auto VOLUMEID_SIZE = 10;
 //  static const auto OUTPUTID_SIZE = 6;

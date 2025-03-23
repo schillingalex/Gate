@@ -191,6 +191,18 @@ G4bool GateCrystalSD::ProcessHits(G4Step*aStep, G4TouchableHistory*)
   // Create a new crystal hit
   GateCrystalHit* aHit = new GateCrystalHit();
 
+  G4String creatorProcess;
+  if (aTrack->GetCreatorProcess())
+    creatorProcess = aTrack->GetCreatorProcess()->GetProcessName();
+  else
+    creatorProcess = "Event Generator";
+
+  G4String productionVolume;
+  if (aTrack->GetLogicalVolumeAtVertex())
+    productionVolume = aTrack->GetLogicalVolumeAtVertex()->GetName();
+  else
+    productionVolume = "";
+
   // Store the data already obtained into the hit
   aHit->SetPDGEncoding( PDGEncoding );
   aHit->SetEdep( edep );
@@ -212,6 +224,9 @@ G4bool GateCrystalSD::ProcessHits(G4Step*aStep, G4TouchableHistory*)
   aHit->SetSourceType( source_type );
   aHit->SetDecayType( decay_type );
   aHit->SetGammaType( gamma_type );
+
+  aHit->SetCreatorProcess(creatorProcess);
+  aHit->SetProductionVolume(productionVolume);
 
   // Ask the system to compute the output volume ID and store it into the hit
 

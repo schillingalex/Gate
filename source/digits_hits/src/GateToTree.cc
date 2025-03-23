@@ -100,6 +100,8 @@ GateToTree::GateToTree(const G4String &name, GateOutputMgr *outputMgr, DigiMode 
     m_hitsParams_to_write.emplace("sourceType", SaveDataParam());
     m_hitsParams_to_write.emplace("decayType", SaveDataParam());
     m_hitsParams_to_write.emplace("gammaType", SaveDataParam());
+    m_hitsParams_to_write.emplace("creatorProcess", SaveDataParam());
+    m_hitsParams_to_write.emplace("productionVolume", SaveDataParam());
 
     m_opticalParams_to_write.emplace("NumScintillation", SaveDataParam());
     m_opticalParams_to_write.emplace("NumCrystalWLS", SaveDataParam());
@@ -328,6 +330,12 @@ void GateToTree::RecordBeginOfAcquisition() {
 
         if (m_hitsParams_to_write.at("gammaType").toSave())
             m_manager_hits.write_variable("gammaType", &m_gammaType);
+
+        if (m_hitsParams_to_write.at("creatorProcess").toSave())
+            m_manager_hits.write_variable("creatorProcess", &m_creatorProcess, MAX_NB_CHARACTER);
+
+        if (m_hitsParams_to_write.at("productionVolume").toSave())
+            m_manager_hits.write_variable("productionVolume", &m_productionVolume, MAX_NB_CHARACTER);
 
 
         m_manager_hits.write_header();
@@ -689,6 +697,9 @@ void GateToTree::RecordEndOfEvent(const G4Event *event) {
         m_sourceType = hit->GetSourceType();
         m_decayType = hit->GetDecayType();
         m_gammaType = hit->GetGammaType();
+
+        m_creatorProcess = hit->GetCreatorProcess();
+        m_productionVolume = hit->GetProductionVolume();
 
         m_manager_hits.fill();
     }
