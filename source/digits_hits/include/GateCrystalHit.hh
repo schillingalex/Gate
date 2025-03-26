@@ -106,8 +106,10 @@ private:
   G4int m_decayType = 0;//0 means 'by default not known'; decayType says what type of Ps decay is used: standard (without prompt gamma), deexcitation (with prompt gamma)
   G4int m_gammaType = 0;//0 means 'by default not known'; gammaType says what type of gamma is emitted: annihilation, prompt, other
 
+  // Information about the creation of the track causing a hit
   G4String m_creatorProcess;
   G4String m_productionVolume;
+  G4double m_ekineAtCreation;
 
   public:
       inline void SetEdep(G4double de)          { m_edep = de; }
@@ -262,6 +264,9 @@ private:
 
       inline void SetProductionVolume(G4String vol) { m_productionVolume = vol; }
       inline G4String GetProductionVolume() const { return m_productionVolume; }
+
+      inline void SetEkineAtCreation(G4double ekine) { m_ekineAtCreation = ekine; }
+      inline G4double GetEkineAtCreation() const { return m_ekineAtCreation; }
 };
 
 typedef G4THitsCollection<GateCrystalHit> GateCrystalHitsCollection;

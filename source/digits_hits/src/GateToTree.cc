@@ -102,6 +102,7 @@ GateToTree::GateToTree(const G4String &name, GateOutputMgr *outputMgr, DigiMode 
     m_hitsParams_to_write.emplace("gammaType", SaveDataParam());
     m_hitsParams_to_write.emplace("creatorProcess", SaveDataParam());
     m_hitsParams_to_write.emplace("productionVolume", SaveDataParam());
+    m_hitsParams_to_write.emplace("ekineAtCreation", SaveDataParam());
 
     m_opticalParams_to_write.emplace("NumScintillation", SaveDataParam());
     m_opticalParams_to_write.emplace("NumCrystalWLS", SaveDataParam());
@@ -336,6 +337,9 @@ void GateToTree::RecordBeginOfAcquisition() {
 
         if (m_hitsParams_to_write.at("productionVolume").toSave())
             m_manager_hits.write_variable("productionVolume", &m_productionVolume, MAX_NB_CHARACTER);
+
+        if (m_hitsParams_to_write.at("ekineAtCreation").toSave())
+            m_manager_hits.write_variable("ekineAtCreation", &m_ekineAtCreation);
 
 
         m_manager_hits.write_header();
@@ -700,6 +704,7 @@ void GateToTree::RecordEndOfEvent(const G4Event *event) {
 
         m_creatorProcess = hit->GetCreatorProcess();
         m_productionVolume = hit->GetProductionVolume();
+        m_ekineAtCreation = hit->GetEkineAtCreation();
 
         m_manager_hits.fill();
     }

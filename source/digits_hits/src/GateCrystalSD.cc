@@ -227,6 +227,7 @@ G4bool GateCrystalSD::ProcessHits(G4Step*aStep, G4TouchableHistory*)
 
   aHit->SetCreatorProcess(creatorProcess);
   aHit->SetProductionVolume(productionVolume);
+  aHit->SetEkineAtCreation(aTrack->GetVertexKineticEnergy());
 
   // Ask the system to compute the output volume ID and store it into the hit
 

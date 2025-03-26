@@ -186,6 +186,7 @@ private:
 
   std::string m_creatorProcess;
   std::string m_productionVolume;
+  G4float m_ekineAtCreation;
 
 
   static const auto VOLUMEID_SIZE = 10;
