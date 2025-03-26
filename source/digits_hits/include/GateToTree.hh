@@ -188,6 +188,8 @@ private:
   std::string m_productionVolume;
   G4float m_ekineAtCreation;
 
+  G4float m_remainingEkine;
+
 
   static const auto VOLUMEID_SIZE = 10;
 //  static const auto OUTPUTID_SIZE = 6;

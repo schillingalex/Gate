@@ -111,6 +111,8 @@ private:
   G4String m_productionVolume;
   G4double m_ekineAtCreation;
 
+  G4double m_remainingEkine; // How much kinetic energy does the track have post step
+
   public:
       inline void SetEdep(G4double de)          { m_edep = de; }
       inline void AddEdep(G4double de)          { m_edep += de; }
@@ -267,6 +269,9 @@ private:
 
       inline void SetEkineAtCreation(G4double ekine) { m_ekineAtCreation = ekine; }
       inline G4double GetEkineAtCreation() const { return m_ekineAtCreation; }
+
+      inline void SetRemainingEkine(G4double ekine) { m_remainingEkine = ekine; }
+      inline G4double GetRemainingEkine() const { return m_remainingEkine; }
 };
 
 typedef G4THitsCollection<GateCrystalHit> GateCrystalHitsCollection;
